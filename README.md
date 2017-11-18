@@ -2,7 +2,11 @@
 
 ## Entitys
 ### Top Level Entity
-
+  
+The top-level module “calc_top” of the calculator consists of three sub-units named “io_ctrl”,  
+“calc_ctrl” and “alu” which are described in the following. Table 3: Overview shows all I/Os of the top-level  
+module “calc_top”.  
+  
 | Port Name     | Direction | Description                                                                                                 |
 | ------------- |:---------:| ----------------------------------------------------------------------------------------------------------- |
 | clk_i         | In        | System clock (100 MHz)                                                                                      |
@@ -12,9 +16,17 @@
 | ss_o(7:0)     | Out       | Contain the value for all four 7-segment digits (including the decimal point)                               |
 | ss_sel_o(3:0) | Out       | Select one out of four 7-segment digits                                                                     |
 | led_o(15:0)   | Out       | Connected to 16 LEDs                                                                                        |
-
+  
 ### IO Control Unit Entity
-
+  
+The IO control unit “io_ctrl” controls all I/O ports (except the clock and the reset signal). It includes  
+the multiplexer needed for the 7-segment digits, debounces the switches and push buttons and  
+makes the debounced signals available for FPGA-internal logic on swsync_o(15:0) and  
+pbsync_o(3:0). The IO control unit implements a generic interface for the I/O hardware of the  
+Basys3 board. This means, that not all I/Os are used for the calculator project. For example, some  
+of the LEDs are unused (see the distance learning letter “IO Control Unit” for details). Table 4: Overview  
+shows all ports of the IO control unit.  
+  
 | Port Name      | Direction | Description                                                                                                |
 | -------------- |:---------:| ---------------------------------------------------------------------------------------------------------- |
 | clk_i          | In        | System clock (100 MHz)                                                                                     |
@@ -31,10 +43,17 @@
 | led_o(15:0)    | Out       | Connected to 16 LEDs of the FPGA board                                                                     |
 | swsync_o(15:0) | Out       | State of 16 debounced switches (to FPGA-internal logic)                                                    |
 | pbsync_o(3:0)  | Out       | State of 4 debounced push buttons (to FPGA-internal logic)                                                 |
-
+  
 ### Calculator Control Unit Entity
-
-
+  
+The calculator control sub-unit “calc_ctrl” is the main control unit of the calculator. It provides the  
+two operands OP1 and OP2 as well as the type of arithmetic/logic operation to the ALU (Arithmetic  
+Logic Unit) and starts processing of an operation via signal “start_o”. Once the calculation is  
+finished (indicated by the ALU via signal “finished_i”) the result of the calculation and the sign bit as  
+well as special conditions like error or overflow will be evaluated and forwarded to the IO control  
+unit. Table 5: Overview shows the ports of the calculator control unit while implementation details can be  
+found in the distance learning letter “Calculator Control Unit”.  
+  
 | Port Name      | Direction | Description                                                                                                |
 | -------------- |:---------:| ---------------------------------------------------------------------------------------------------------- |
 | clk_i          | In        | System clock (100 MHz)                                                                                     |
@@ -55,9 +74,13 @@
 | dig2_o(7:0)    | Out       | State of 7 segments and decimal point of Digit 2 (to IO control unit)                                      |
 | dig3_o(7:0)    | Out       | State of 7 segments and decimal point of Digit 3 (to IO control unit)                                      |
 | led_o(15:0)    | Out       | State of 16 LEDs (to IO control unit)                                                                      |
-
+  
 ### ALU Contorl Unit Entity
-
+  
+The arithmetic logic unit “alu” processes the selected arithmetic/logic operation. Table 6: Overview shows the  
+ports of the ALU, implementation details can be found in the distance learning letter “Arithmetic  
+Logic Unit”.  
+  
 | Port Name      | Direction | Description                                                                                                |
 | -------------- |:---------:| ---------------------------------------------------------------------------------------------------------- |
 | clk_i          | In        | System clock (100MHz)                                                                                      |
@@ -71,3 +94,17 @@
 | sign_o         | Out       | Sign bit of the result of an operation exceeeds 16 bits                                                    |
 | overflow_o     | Out       | Indicates that the result of an operation exceeds 16 bits                                                  |
 | error_o        | Out       | Indicates that an error occurred during processing of the operation                                        |
+  
+The pin-out for the FPGA is shown in Table 7: Overview  
+  
+| Port Name                 | Pin | Feature      |
+| ------------------------- |:---:| ------------ |
+| clk_i                     | W5  | System Clock |
+| reset_i                   | T18 | Button BTNU  |
+| ss_sel_o(0)...ss_sel_o(3) |     |              |
+| ss_o(0)...ss_o(7)         |     |              |
+| sw_i(0)...sw_i(15)        |     |              |
+| pb_i(0)...pb_i(3)         |     |              |
+| led_o(0)...led_o(15)      |     |              |
+  
+Pin Description Printed on the Basys3 board and the schematics of the FPGA board (CIS website "FPGA Board Documentation")  
