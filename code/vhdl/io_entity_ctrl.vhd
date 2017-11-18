@@ -11,7 +11,7 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.std_logic_arith.all;
 
-entity io_ctrl is
+entity io_ctrl_entity is
 	port(clk_i    :  in std_logic;												-- System Clock (100 MHz)
 	     reset_i  :  in std_logic;												-- Asynchronous reset (BTNU)
 	     dig0_i   :  in std_logic_vector( 7 downto 0);		-- State of 7 segments and decimal point of Digit 0 (from FPGA-internal logic)
@@ -26,4 +26,4 @@ entity io_ctrl is
 	     led_o    : out std_logic_vector(15 downto 0);		-- Connected to 16 LEDs of the FPGA board
 	     swsync_o : out std_logic_vector(15 downto 0);		-- State of 16 debounced switches (to FPGA-internal logic)
 	     pbsync_o : out std_logic_vector( 3 downto 0));		-- State of 4 debounced push buttons (to FPGA-internal logic)
-end io_ctrl;
+end io_ctrl_entity;
