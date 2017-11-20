@@ -6,10 +6,8 @@
 -- File : io_entity_ctrl.vhd                                                 --
 -------------------------------------------------------------------------------
 
-library work;
 library IEEE;
 use IEEE.std_logic_1164.all;
-use IEEE.std_logic_arith.all;
 
 entity io_ctrl_entity is
 	port(clk_i    :  in std_logic;												-- System Clock (100 MHz)
