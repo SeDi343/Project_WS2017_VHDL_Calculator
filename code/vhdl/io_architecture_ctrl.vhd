@@ -36,8 +36,10 @@ begin
 			-- When the terminal count is reached, set enable signal and reset the
 			-- counter.
 			
+			-- 1khz signal allways low
 			s_1khzen <= '0';
 			
+			-- if counter equals the requested value else increment the counter
 			if s_enctr = C_ENCOUNTVAL then
 				s_1khzen = '1';
 				s_enctr = '0';	
@@ -60,7 +62,8 @@ begin
 			-- The switches and buttons are debounced and forwarded to internal signals.
 			-- Both tasks are synchronous to the previousl generated 1kHz enable signal.
 			
-			if s_1khzen'event and s_1khzen = '1' then
+			-- If the 1khz signal is high put input of buttons and switches to signal
+			if s_1khzen = '1' then
 				pbsync <= pb_i;
 				swsync <= sw_i;
 			end if;
