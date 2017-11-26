@@ -35,6 +35,16 @@ begin
 			-- As long as the terminal count is not reached: increment the counter.
 			-- When the terminal count is reached, set enable signal and reset the
 			-- counter.
+			
+			s_1khzen <= '0';
+			
+			if s_enctr = C_ENCOUNTVAL then
+				s_1khzen = '1';
+				s_enctr = '0';	
+			else
+				s_enctr <= s_enctr + '1';
+			end if;
+			
 		end if;
 	end process p_s1khzen;
 	
@@ -45,9 +55,16 @@ begin
 	begin
 		if reset_i = '1' then
 			-- Reset System
+			
 		elsif clk_i'event and clk_i = '1' then
 			-- The switches and buttons are debounced and forwarded to internal signals.
 			-- Both tasks are synchronous to the previousl generated 1kHz enable signal.
+			
+			if s_1khzen'event and s_1khzen = '1' then
+				pbsync <= pb_i;
+				swsync <= sw_i;
+			end if;
+			
 		end if;
 	end process p_debounce;
 	
@@ -74,6 +91,6 @@ begin
 	-----------------------------------------------------------------------------
 	-- Handle the 16 LEDs
 	-----------------------------------------------------------------------------
-	led_o <= led_i	-- connect the internal to the external signals
+	led_o <= led_i;	-- connect the internal to the external signals
 	
 end io_architecture_ctrl;
