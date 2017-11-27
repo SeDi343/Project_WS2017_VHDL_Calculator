@@ -15,6 +15,7 @@ architecture calc_architecture_ctrl of calc_ctrl_entity is
 	
 	signal s_op1     : std_logic_vector(11 downto 0);
 	signal s_op2     : std_logic_vector(11 downto 0);
+	signal s_optype  : std_logic_vector( 3 downto 0);
 	signal s_state   : t_state;
 	
 begin
