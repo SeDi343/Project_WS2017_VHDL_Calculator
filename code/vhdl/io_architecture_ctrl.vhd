@@ -33,6 +33,8 @@ begin
 		if reset_i = '1' then
 			-- Reset System
 			
+			s_1khzen <= '0';
+			s_enctr <= '0';
 			s_state <= MUX_DIG0;
 			
 		elsif clk_i'event and clk_i = '1' then
@@ -63,6 +65,8 @@ begin
 		if reset_i = '1' then
 			-- Reset System
 			
+			s_1khzen <= '0';
+			s_enctr <= '0';
 			s_state <= MUX_DIG0;
 			
 		elsif clk_i'event and clk_i = '1' then
@@ -90,6 +94,8 @@ begin
 		if reset_i = '1' then
 			-- Reset System
 			
+			s_1khzen <= '0';
+			s_enctr <= '0';
 			s_state <= MUX_DIG0;
 			
 		elsif clk_i'event and clk_i = '1' then
