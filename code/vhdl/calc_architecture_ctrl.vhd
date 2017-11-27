@@ -108,6 +108,31 @@ begin
 					s_led <= "0000000000000000";
 					s_dig0 <= C_OPTYPESTART;
 					s_optype <= swsync_i(15 downto 12);
+					
+					-- Print out Sub, sro, And, roL, Err for the chosen algorithm
+					case s_optype is
+						when "0001" =>
+							s_dig1 <= "01001001";	-- Digit "S"
+							s_dig2 <= "11000111";	-- Digit "u"
+							s_dig3 <= "11000001";	-- Digit "b"
+						when "0110" =>
+							s_dig1 <= "01001001";	-- Digit "S"
+							s_dig2 <= "11110101";	-- Digit "r"
+							s_dig3 <= "11000101";	-- Digit "o"
+						when "1001" =>
+							s_dig1 <= "00010001";	-- Digit "A"
+							s_dig2 <= "11010101";	-- Digit "n"
+							s_dig3 <= "10000101";	-- Digit "d"
+						when "1100" =>
+							s_dig1 <= "11110101";	-- Digit "r"
+							s_dig2 <= "11000101";	-- Digit "o"
+							s_dig3 <= "00011101";	-- Digit "L"
+						when others =>
+							s_dig1 <= "11100001";	-- Digit "E"
+							s_dig2 <= "11110101";	-- Digit "r"
+							s_dig3 <= "11110101";	-- Digit "r"
+					end case;
+					
 					s_state <= RESULT;
 				
 				-- State 4: BTNL => DISP1 shows signed result (or error/overflow)
