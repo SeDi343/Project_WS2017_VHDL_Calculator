@@ -132,7 +132,7 @@ begin
 						s_ss <= dig0_i;
 						s_state <= MUX_DIG1;
 				end case;
-				
+			end if;	
 		end if;
 	end process p_display_ctrl;
 	
