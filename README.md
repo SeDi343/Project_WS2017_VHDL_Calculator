@@ -111,11 +111,11 @@ Pin Description Printed on the Basys3 board and the schematics of the FPGA board
 
 ## ALU Calculations
 
-5; A; Sub, Square Root, Logical AND, Rotate Left
+**5 A** : Sub, Square Root, Logical AND, Rotate Left
 
 | SW12 to SW15 | DISP1 | Operation   | Result of Operation                                                                                                                               |
 |:------------:|:-----:|:-----------:| ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 0001         | 'Sub' | Sub         | OP1 - OP2                                                                                                                                         |
-| 0110         | 'Sro' | Square Root | Integer fraction of root(OP1) (value of OP2 will be ignored)                                                                                      |
-| 1001         | 'And' | Logical AND | Performs bit-wise AND of OP1 with OP2                                                                                                             |
-| 1100         | 'roL' | Rotate Left | OP1 will be shifted left by one bit position and the most significant bit of OP1 becomes the least significant bit (value of OP2 will be ignored) |
+| 0001         | `Sub` | Sub         | OP1 - OP2                                                                                                                                         |
+| 0110         | `Sro` | Square Root | Integer fraction of root(OP1) (value of OP2 will be ignored)                                                                                      |
+| 1001         | `And` | Logical AND | Performs bit-wise AND of OP1 with OP2                                                                                                             |
+| 1100         | `roL` | Rotate Left | OP1 will be shifted left by one bit position and the most significant bit of OP1 becomes the least significant bit (value of OP2 will be ignored) |
