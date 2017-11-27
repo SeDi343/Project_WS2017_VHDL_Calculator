@@ -122,23 +122,23 @@ Pin Description Printed on the Basys3 board and the schematics of the FPGA board
 
 ### User Interface: A
 
-State 1: RESET => Left Digit of DISP1 shows "1"
+**State 1: RESET** => Left Digit of DISP1 shows "1"
 * unsigned 12bit OP1
 * change OP1 with SW0-SW11
   * changes are visible immediately on DISP1 in HEX
   
-State 2: BTNL => Left Digit of DISP1 shows "2"
+**State 2: BTNL** => Left Digit of DISP1 shows "2"
 * unsigned 12bit OP2
 * change OP2 with SW0-SW11
   * changes are visible immediately on DISP1 in HEX
   
-State 3: BTNL => Left Digit of DISP1 shows "o"
+**State 3: BTNL** => Left Digit of DISP1 shows "o"
 * change arithmetic with SW12-SW15
 * changes are visible immediately on DISP1
 * all 16 LEDs are off
   
-State 4: BTNL => DISP1 shows signed result (or error/overflow)
+**State 4: BTNL** => DISP1 shows signed result (or error/overflow)
 * LED15 is on if result is displayed
   
-State 5: BTNL => Jump into State 1: RESET
+**State 5: BTNL** => Jump into State 1: RESET
 
