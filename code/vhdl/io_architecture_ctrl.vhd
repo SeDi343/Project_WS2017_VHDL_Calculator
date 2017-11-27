@@ -13,12 +13,15 @@ use IEEE.std_logic_arith.all;
 architecture io_architecture_ctrl of io_entity_ctrl is
 	constant C_ENCOUNTVAL : std_logic_vector(16 downto 0) := "11000011010100000";
 	
+	type t_state is (MUX_DIG0, MUX_DIG1, MUX_DIG2, MUX_DIG3);
+	
 	signal s_enctr   : std_logic_vector(16 downto 0);	-- Counter
 	signal s_1khzen  : std_logic;											-- 1kHz enable signal
 	signal swsync    : std_logic_vector(15 downto 0);	-- Debounced Switches signal
 	signal pbsync    : std_logic_vector( 3 downto 0);	-- Debounced push buttions signal
 	signal s_ss_sel  : std_logic_vector( 3 downto 0);	-- Selection of 7-segment digit signal
 	signal s_ss      : std_logic_vector( 7 downto 0); -- Value for 7-segment digit signal
+	signal s_state   : t_state;
 	
 begin
 	
@@ -29,6 +32,8 @@ begin
 	begin
 		if reset_i = '1' then
 			-- Reset System
+			
+			s_state <= MUX_DIG0;
 			
 		elsif clk_i'event and clk_i = '1' then
 			-- Enable signal is inactive per default
@@ -58,6 +63,8 @@ begin
 		if reset_i = '1' then
 			-- Reset System
 			
+			s_state <= MUX_DIG0;
+			
 		elsif clk_i'event and clk_i = '1' then
 			-- The switches and buttons are debounced and forwarded to internal signals.
 			-- Both tasks are synchronous to the previousl generated 1kHz enable signal.
@@ -83,7 +90,7 @@ begin
 		if reset_i = '1' then
 			-- Reset System
 			
-			s_ss_sel <= "0111";
+			s_state <= MUX_DIG0;
 			
 		elsif clk_i'event and clk_i = '1' then
 			-- Set one of the four 7-segment select signals s_ss_sel to logic 0 and
@@ -91,18 +98,33 @@ begin
 			-- enable signal.
 			
 			if s_1khzen = '1' then
-				-- Set one of the four 7-segment select signals to logic 0 (4-bit shifter)
-				-- CHECK THIS: MAYBE WRONG?
-				-- USE STATES INSTEAD OF THIS
-				-- s_ss_sel <= s_ss_sel(2 downto 0) & '0';
-				s_ss_sel <= s_ss_sel(0) & s_ss_sel(3 downto 1);
-				
-				case s_ss_sel is
-					when "0111" => s_ss <= dig0_i;
-					when "1011" => s_ss <= dig1_i;
-					when "1101" => s_ss <= dig2_i;
-					when "1110" => s_ss <= dig3_i;
-					when others => s_ss <= dig0_i;
+
+				case s_state is
+					-- State 1: 1st 7-segment Digit
+					when MUX_DIG0 =>
+						s_ss_sel <= "0111";
+						s_ss <= dig0_i;
+						s_state <= MUX_DIG1;
+					-- State 2: 2nd 7-segment Digit
+					when MUX_DIG1 =>
+						s_ss_sel <= "1011";
+						s_ss <= dig1_i;
+						s_state <= MUX_DIG2;
+					-- State 3: 3rd 7-segment Digit
+					when MUX_DIG2 =>
+						s_ss_sel <= "1101";
+						s_ss <= dig2_i;
+						s_state <= MUX_DIG3;
+					-- State 4: 4th 7-segment Digit
+					when MUX_DIG3 =>
+						s_ss_sel <= "1110";
+						s_ss <= dig3_i;
+						s_state <= MUX_DIG0;
+					-- State 5: In case of anything do the same as State 1
+					when others =>
+						s_ss_sel <= "0111";
+						s_ss <= dig0_i;
+						s_state <= MUX_DIG1;
 				end case;
 				
 		end if;
