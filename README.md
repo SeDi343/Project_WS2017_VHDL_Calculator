@@ -119,3 +119,26 @@ Pin Description Printed on the Basys3 board and the schematics of the FPGA board
 | 0110         | `Sro` | Square Root | Integer fraction of root(OP1) (value of OP2 will be ignored)                                                                                      |
 | 1001         | `And` | Logical AND | Performs bit-wise AND of OP1 with OP2                                                                                                             |
 | 1100         | `roL` | Rotate Left | OP1 will be shifted left by one bit position and the most significant bit of OP1 becomes the least significant bit (value of OP2 will be ignored) |
+
+### User Interface: A
+
+State 1: RESET => Left Digit of DISP1 shows "1"
+* unsigned 12bit OP1
+* change OP1 with SW0-SW11
+  * changes are visible immediately on DISP1 in HEX
+  
+State 2: BTNL => Left Digit of DISP1 shows "2"
+* unsigned 12bit OP2
+* change OP2 with SW0-SW11
+  * changes are visible immediately on DISP1 in HEX
+  
+State 3: BTNL => Left Digit of DISP1 shows "o"
+* change arithmetic with SW12-SW15
+* changes are visible immediately on DISP1
+* all 16 LEDs are off
+  
+State 4: BTNL => DISP1 shows signed result (or error/overflow)
+* LED15 is on if result is displayed
+  
+State 5: BTNL => Jump into State 1: RESET
+
