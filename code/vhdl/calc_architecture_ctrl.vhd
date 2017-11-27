@@ -93,12 +93,21 @@ begin
 				-- State 2: BTNL => Left Digit of DISP1 shows "2" and OP2 Input
 				--                  Change OP2 with SW0-SW12 / changes visible on DISP1 in HEX
 				when OP2 =>
+					s_led <= "0000000000000000";
+					s_dig0 <= C_OP2START;
+					s_dig1 <= BinaryToDigit(swsync_i(11 downto 8));
+					s_dig2 <= BinaryToDigit(swsync_i( 7 downto 4));
+					s_dig3 <= BinaryToDigit(swsync_i( 3 downto 0));
+					s_op2 <= swsync_i(11 downto 0);
 					s_state <= OPTYPE;
 				
 				-- State 3: BTNL => Left Digit of DISP1 shows "o" and OPTYPE Input
 				--                  Change OPTYPE with SW12-SW15 / changes visible on DISP1 in HEX
 				--                  16 LEDs are off
 				when OPTYPE =>
+					s_led <= "0000000000000000";
+					s_dig0 <= C_OPTYPESTART;
+					s_optype <= swsync_i(15 downto 12);
 					s_state <= RESULT;
 				
 				-- State 4: BTNL => DISP1 shows signed result (or error/overflow)
