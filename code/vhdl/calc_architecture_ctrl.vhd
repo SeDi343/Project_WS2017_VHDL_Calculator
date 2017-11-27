@@ -35,7 +35,7 @@ architecture calc_architecture_ctrl of calc_ctrl_entity is
 	function BinaryToDigit (binary_digit : std_logic_vector(3 downto 0))
 		return std_logic_vector is
 		
-		variable result_digit : std_logic_vector;
+		variable result_digit : std_logic_vector(7 downto 0);
 		
 	begin
 		
