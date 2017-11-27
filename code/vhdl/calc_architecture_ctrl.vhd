@@ -40,6 +40,7 @@ architecture calc_architecture_ctrl of calc_ctrl_entity is
 	begin
 		
 		case binary_digit is
+			--                              ABCDEFGDP
 			when "0000" => result_digit := "00000011";	-- Digit "0"
 			when "0001" => result_digit := "00011111";	-- Digit "1"
 			when "0010" => result_digit := "00100101";	-- Digit "2"
@@ -56,7 +57,7 @@ architecture calc_architecture_ctrl of calc_ctrl_entity is
 			when "1101" => result_digit := "10000101";	-- Digit "d"
 			when "1110" => result_digit := "01100001";	-- Digit "E"
 			when "1111" => result_digit := "01110001";	-- Digit "F"
-			when others => result_digit := "00100001";	-- Digit "e"
+			when others => result_digit := "11111111";	-- Digit " "
 		end case;
 		return result_digit;
 	end;
@@ -73,7 +74,6 @@ begin
 			
 			s_state <= OP1;
 			s_start <= '0';
-			s_led <= "0000000000000000";
 			
 		elsif clk_i'event and clk_i = '1' then
 			-- Single States of the State Machine for the Calculator
@@ -113,14 +113,14 @@ begin
 		end if;
 	end process p_states;
 	
-	start_o <= s_start;
-	led_o <= s_led;
-	dig0_o <= s_dig0;
-	dig1_o <= s_dig1;
-	dig2_o <= s_dig2;
-	dig3_o <= s_dig3;
-	op1_o <= s_op1;
-	op2_o <= s_op2;
-	optype_o <= s_optype;
+	start_o <= s_start;		-- Write Start signal to output
+	led_o <= s_led;				-- Write LED array signal to output
+	dig0_o <= s_dig0;			-- Write State of 7 segments and decimal point of Digit 0 signal to output
+	dig1_o <= s_dig1;			-- Write State of 7 segments and decimal point of Digit 1 signal to output
+	dig2_o <= s_dig2;			-- Write State of 7 segments and decimal point of Digit 2 signal to output
+	dig3_o <= s_dig3;			-- Write State of 7 segments and decimal point of Digit 3 signal to output
+	op1_o <= s_op1;				-- Write Operand OP1 signal to output
+	op2_o <= s_op2;				-- Write Operand OP2 signal to output
+	optype_o <= s_optype;	-- Write Operand OPTYPE signal to output
 	
 end calc_architecture_ctrl;
