@@ -93,7 +93,9 @@ begin
 			if s_1khzen = '1' then
 				-- Set one of the four 7-segment select signals to logic 0 (4-bit shifter)
 				-- CHECK THIS: MAYBE WRONG?
-				s_ss_sel <= s_ss_sel(2 downto 0) & '0';
+				-- USE STATES INSTEAD OF THIS
+				-- s_ss_sel <= s_ss_sel(2 downto 0) & '0';
+				s_ss_sel <= s_ss_sel(0) & s_ss_sel(3 downto 1);
 				
 				case s_ss_sel is
 					when "0111" => s_ss <= dig0_i;
