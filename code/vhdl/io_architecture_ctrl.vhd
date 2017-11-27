@@ -111,21 +111,25 @@ begin
 						s_ss_sel <= "0111";
 						s_ss <= dig0_i;
 						s_state <= MUX_DIG1;
+					
 					-- State 2: 2nd 7-segment Digit
 					when MUX_DIG1 =>
 						s_ss_sel <= "1011";
 						s_ss <= dig1_i;
 						s_state <= MUX_DIG2;
+					
 					-- State 3: 3rd 7-segment Digit
 					when MUX_DIG2 =>
 						s_ss_sel <= "1101";
 						s_ss <= dig2_i;
 						s_state <= MUX_DIG3;
+					
 					-- State 4: 4th 7-segment Digit
 					when MUX_DIG3 =>
 						s_ss_sel <= "1110";
 						s_ss <= dig3_i;
 						s_state <= MUX_DIG0;
+					
 					-- State 5: In case of anything do the same as State 1
 					when others =>
 						s_ss_sel <= "0111";
