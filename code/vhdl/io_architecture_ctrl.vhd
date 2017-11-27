@@ -17,7 +17,7 @@ architecture io_architecture_ctrl of io_entity_ctrl is
 	signal s_1khzen  : std_logic;											-- 1kHz enable signal
 	signal swsync    : std_logic_vector(15 downto 0);	-- Debounced Switches signal
 	signal pbsync    : std_logic_vector( 3 downto 0);	-- Debounced push buttions signal
-	signal s_ss_sel  : std_logic_vector( 7 downto 0);	-- Selection of 7-segment digit signal
+	signal s_ss_sel  : std_logic_vector( 3 downto 0);	-- Selection of 7-segment digit signal
 	signal s_ss      : std_logic_vector( 7 downto 0); -- Value for 7-segment digit signal
 	
 begin
@@ -63,6 +63,7 @@ begin
 			-- Both tasks are synchronous to the previousl generated 1kHz enable signal.
 			
 			-- If the 1khz signal is high put input of buttons and switches to signal
+			-- SHOULD USE 2 FLIP FLOPS FOR THIS
 			if s_1khzen = '1' then
 				pbsync <= pb_i;
 				swsync <= sw_i;
@@ -81,10 +82,27 @@ begin
 	begin
 		if reset_i = '1' then
 			-- Reset System
+			
+			s_ss_sel <= "0111";
+			
 		elsif clk_i'event and clk_i = '1' then
 			-- Set one of the four 7-segment select signals s_ss_sel to logic 0 and
 			-- multiplex dig0_i - dig3_i to s_ss in a circular fashion using the 1kHz
 			-- enable signal.
+			
+			if s_1khzen = '1' then
+				-- Set one of the four 7-segment select signals to logic 0 (4-bit shifter)
+				-- CHECK THIS: MAYBE WRONG?
+				s_ss_sel <= s_ss_sel(2 downto 0) & '0';
+				
+				case s_ss_sel is
+					when "0111" => s_ss <= dig0_i;
+					when "1011" => s_ss <= dig1_i;
+					when "1101" => s_ss <= dig2_i;
+					when "1110" => s_ss <= dig3_i;
+					when others => s_ss <= dig0_i;
+				end case;
+				
 		end if;
 	end process p_display_ctrl;
 	
