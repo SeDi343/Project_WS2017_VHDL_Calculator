@@ -34,8 +34,7 @@ begin
 			-- Reset System
 			
 			s_1khzen <= '0';
-			s_enctr <= "00000000000000000";	
-			s_state <= MUX_DIG0;
+			s_enctr <= "00000000000000000";
 			
 		elsif clk_i'event and clk_i = '1' then
 			-- Enable signal is inactive per default
@@ -51,8 +50,7 @@ begin
 				s_1khzen <= '1';
 				s_enctr <= "00000000000000000";
 			else
-				-- s_enctr <= unsigned(s_enctr) + '1';
-				s_enctr <= s_enctr + '1';
+				s_enctr <= unsigned(s_enctr) + '1';
 			end if;
 			
 		end if;
@@ -66,9 +64,8 @@ begin
 		if reset_i = '1' then
 			-- Reset System
 			
-			s_1khzen <= '0';
-			s_enctr <= "00000000000000000";
-			s_state <= MUX_DIG0;
+			swsync <= "0000000000000000";
+			pbsync <= "0000";
 			
 		elsif clk_i'event and clk_i = '1' then
 			-- The switches and buttons are debounced and forwarded to internal signals.
@@ -95,8 +92,6 @@ begin
 		if reset_i = '1' then
 			-- Reset System
 			
-			s_1khzen <= '0';
-			s_enctr <= "00000000000000000";
 			s_state <= MUX_DIG0;
 			
 		elsif clk_i'event and clk_i = '1' then

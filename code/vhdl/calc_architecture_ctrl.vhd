@@ -10,7 +10,7 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.std_logic_arith.all;
 
-architecture calc_architecture_ctrl of calc_ctrl_entity is
+architecture calc_architecture_ctrl of calc_entity_ctrl is
 	-- Site 4 of IOControl PDF digit A,B,C,D,E,F,G,DP
 	constant C_OP1START    : std_logic_vector(7 downto 0) := "00011110";	-- "1" code for 7-segment
 	constant C_OP2START    : std_logic_vector(7 downto 0) := "00100100";	-- "2" code for 7-segment
@@ -69,7 +69,7 @@ begin
 	-----------------------------------------------------------------------------
 	p_states : process(clk_i, reset_i)
 	begin
-		if reset = '1' then
+		if reset_i = '1' then
 			-- Reset System
 			
 			s_state <= OP1;
@@ -142,6 +142,8 @@ begin
 							s_dig3 <= "00010001";	-- Digit "A"
 					end case;
 					
+					s_start <= '1';
+					
 					-- If Button BTNL is pressed
 					if pbsync_i = "1000" then
 						s_state <= RESULT;
@@ -150,6 +152,7 @@ begin
 				-- State 4: BTNL => DISP1 shows signed result (or error/overflow)
 				--                  LED15 is on if result is displayed
 				when RESULT =>
+					s_start <= '0';
 					
 					-- If Button BTNL is pressed
 					if pbsync_i = "1000" then
