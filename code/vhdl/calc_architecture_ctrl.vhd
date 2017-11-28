@@ -74,6 +74,7 @@ begin
 			
 			s_state <= OP1;
 			s_start <= '0';
+			s_led <= "0000000000000000";
 			
 		elsif clk_i'event and clk_i = '1' then
 			-- Single States of the State Machine for the Calculator
@@ -88,7 +89,11 @@ begin
 					s_dig2 <= BinaryToDigit(swsync_i( 7 downto 4));
 					s_dig3 <= BinaryToDigit(swsync_i( 3 downto 0));
 					s_op1 <= swsync_i(11 downto 0);
-					s_state <= OP2;
+					
+					-- If Button BTNL is pressed
+					if pbsync_i = "1000" then
+						s_state <= OP2;
+					end if;
 				
 				-- State 2: BTNL => Left Digit of DISP1 shows "2" and OP2 Input
 				--                  Change OP2 with SW0-SW12 / changes visible on DISP1 in HEX
@@ -99,7 +104,11 @@ begin
 					s_dig2 <= BinaryToDigit(swsync_i( 7 downto 4));
 					s_dig3 <= BinaryToDigit(swsync_i( 3 downto 0));
 					s_op2 <= swsync_i(11 downto 0);
-					s_state <= OPTYPE;
+					
+					-- If Button BTNL is pressed
+					if pbsync_i = "1000" then
+						s_state <= OPTYPE;
+					end if;
 				
 				-- State 3: BTNL => Left Digit of DISP1 shows "o" and OPTYPE Input
 				--                  Change OPTYPE with SW12-SW15 / changes visible on DISP1 in HEX
@@ -128,17 +137,24 @@ begin
 							s_dig2 <= "11000101";	-- Digit "o"
 							s_dig3 <= "00011101";	-- Digit "L"
 						when others =>
-							s_dig1 <= "11100001";	-- Digit "E"
-							s_dig2 <= "11110101";	-- Digit "r"
-							s_dig3 <= "11110101";	-- Digit "r"
+							s_dig1 <= "11111111";	-- Digit " "
+							s_dig2 <= "11010101";	-- Digit "n"
+							s_dig3 <= "00010001";	-- Digit "A"
 					end case;
 					
-					s_state <= RESULT;
+					-- If Button BTNL is pressed
+					if pbsync_i = "1000" then
+						s_state <= RESULT;
+					end if;
 				
 				-- State 4: BTNL => DISP1 shows signed result (or error/overflow)
 				--                  LED15 is on if result is displayed
 				when RESULT =>
-					s_state <= RESTART;
+					
+					-- If Button BTNL is pressed
+					if pbsync_i = "1000" then
+						s_state <= RESTART;
+					end if;
 				
 				-- State 5:  BTNL => Jump to State 1
 				when RESTART =>

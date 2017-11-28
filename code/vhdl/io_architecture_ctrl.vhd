@@ -106,6 +106,7 @@ begin
 			if s_1khzen = '1' then
 
 				case s_state is
+					-- Low Active (0 is the chosen Segment)
 					-- State 1: 1st 7-segment Digit
 					when MUX_DIG0 =>
 						s_ss_sel <= "0111";
