@@ -34,7 +34,7 @@ begin
 			-- Reset System
 			
 			s_1khzen <= '0';
-			s_enctr <= '0';
+			s_enctr <= "00000000000000000";	
 			s_state <= MUX_DIG0;
 			
 		elsif clk_i'event and clk_i = '1' then
@@ -48,9 +48,10 @@ begin
 			
 			-- if counter equals the requested value else increment the counter
 			if s_enctr = C_ENCOUNTVAL then
-				s_1khzen = '1';
-				s_enctr = '0';	
+				s_1khzen <= '1';
+				s_enctr <= "00000000000000000";
 			else
+				-- s_enctr <= unsigned(s_enctr) + '1';
 				s_enctr <= s_enctr + '1';
 			end if;
 			
@@ -66,7 +67,7 @@ begin
 			-- Reset System
 			
 			s_1khzen <= '0';
-			s_enctr <= '0';
+			s_enctr <= "00000000000000000";
 			s_state <= MUX_DIG0;
 			
 		elsif clk_i'event and clk_i = '1' then
@@ -95,7 +96,7 @@ begin
 			-- Reset System
 			
 			s_1khzen <= '0';
-			s_enctr <= '0';
+			s_enctr <= "00000000000000000";
 			s_state <= MUX_DIG0;
 			
 		elsif clk_i'event and clk_i = '1' then
