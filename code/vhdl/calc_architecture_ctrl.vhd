@@ -8,7 +8,7 @@
 
 library IEEE;
 use IEEE.std_logic_1164.all;
-use IEEE.std_logic_arith.all;
+--use IEEE.std_logic_arith.all;
 
 architecture calc_architecture_ctrl of calc_entity_ctrl is
 	-- Site 4 of IOControl PDF digit A,B,C,D,E,F,G,DP
@@ -79,6 +79,7 @@ begin
 		elsif clk_i'event and clk_i = '1' then
 			-- Single States of the State Machine for the Calculator
 			
+			-- From State 1 to State 5; with BTNL button
 			case s_state is
 				-- State 1: RESET => Left Digit of DISP1 shows "1" and OP1 Input
 				--                   Change OP1 with SW0-SW12 / changes visible on DISP1 in HEX
