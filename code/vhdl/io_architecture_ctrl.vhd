@@ -11,6 +11,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.std_logic_arith.all;
 
 architecture io_architecture_ctrl of io_entity_ctrl is
+	-- Constant value for the 1kHz signal for the counter
 	constant C_ENCOUNTVAL : std_logic_vector(16 downto 0) := "11000011010100000";
 	
 	type t_state is (MUX_DIG0, MUX_DIG1, MUX_DIG2, MUX_DIG3);
