@@ -154,6 +154,15 @@ begin
 				when RESULT =>
 					s_start <= '0';
 					
+					if finished_i = '1' then
+						-- show result_i
+						-- show sign_i
+					elsif overflow_i = '1' then
+						-- show overflow
+					elsif error_i = '1' then 
+						--show error
+					end if;
+					
 					-- If Button BTNL is pressed
 					if pbsync_i = "1000" then
 						s_state <= RESTART;
