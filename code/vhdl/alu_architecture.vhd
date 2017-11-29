@@ -71,7 +71,7 @@ begin
 						
 					-- OPTYPE = Not Available (error)
 					when others =>
-						s_error = '1';
+						s_error <= '1';
 				end case;
 			end if;
 		end if;
