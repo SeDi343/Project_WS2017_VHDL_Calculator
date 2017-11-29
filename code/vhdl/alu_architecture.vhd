@@ -30,6 +30,12 @@ begin
 			-- Reset System
 			
 		elsif clk_i'event and clk_i = '1' then
+			-- Set the flags to 0 every rising edge
+			s_finished <= '0';
+			s_overflow <= '0';
+			s_error <= '0';
+			s_sign <= '0';
+			
 			-- Code for the ALU calculating Sub, Square Root, Logical AND and rotate Left
 			
 			-- Check if start value is 1 to start calculation

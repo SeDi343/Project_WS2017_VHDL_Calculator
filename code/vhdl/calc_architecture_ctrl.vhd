@@ -143,17 +143,15 @@ begin
 							s_dig3 <= "00010001";	-- Digit "A"
 					end case;
 					
-					s_start <= '1';
-					
 					-- If Button BTNL is pressed
 					if pbsync_i = "1000" then
+						s_start <= '1';
 						s_state <= RESULT;
 					end if;
 				
 				-- State 4: BTNL => DISP1 shows signed result (or error/overflow)
 				--                  LED15 is on if result is displayed
 				when RESULT =>
-					s_start <= '0';
 					
 					if finished_i = '1' then
 						-- show result_i
@@ -163,6 +161,8 @@ begin
 					elsif error_i = '1' then 
 						--show error
 					end if;
+					
+					s_start <= '0';
 					
 					-- If Button BTNL is pressed
 					if pbsync_i = "1000" then
