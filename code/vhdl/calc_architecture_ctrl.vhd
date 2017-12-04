@@ -12,9 +12,9 @@ use IEEE.std_logic_1164.all;
 
 architecture calc_architecture_ctrl of calc_entity_ctrl is
 	-- Site 4 of IOControl PDF digit A,B,C,D,E,F,G,DP
-	constant C_OP1START    : std_logic_vector(7 downto 0) := "00011110";	-- "1" code for 7-segment
-	constant C_OP2START    : std_logic_vector(7 downto 0) := "00100100";	-- "2" code for 7-segment
-	constant C_OPTYPESTART : std_logic_vector(7 downto 0) := "11000100";	-- "o" code for 7-segment
+	constant C_OP1START    : std_logic_vector(7 downto 0) := "00011110";	-- "1." code for 7-segment
+	constant C_OP2START    : std_logic_vector(7 downto 0) := "00100100";	-- "2." code for 7-segment
+	constant C_OPTYPESTART : std_logic_vector(7 downto 0) := "11000100";	-- "o." code for 7-segment
 
 	type t_state is (OP1, OP2, OPTYPE, RESULT, RESTART);	-- States for the FSM Calculator
 	
