@@ -48,8 +48,10 @@ begin
 					when "0001" =>
 						-- Positive Substraction
 						if op1_i > op2_i then
+							-- result = op1 - op2 and fill other bits of result with 0
 							s_result(11 downto 0) <= unsigned(op1_i(11 downto 0)) - unsigned(op2_i(11 downto 0));
 							s_result(15 downto 12) <= "0000";
+							
 							s_sign <= '0';
 							s_finished <= '1';
 							s_overflow <= '0';
@@ -57,9 +59,13 @@ begin
 							
 						-- Negative Substraction
 						elsif op1_i < op2_i then
+							-- result = not(op1 - op2) + 1 and fill other bits of result with 0
+							-- sign is 1
 							s_result(11 downto 0) <= unsigned(op1_i(11 downto 0)) - unsigned(op2_i(11 downto 0));
 							s_result(11 downto 0) <= not(s_result(11 downto 0));
-							s_result(15 downto 12) <= "0001";
+							s_result(11 downto 0) <= unsigned(s_result(11 downto 0)) + '1';
+							s_result(15 downto 12) <= "0000";
+							
 							s_sign <= '1';
 							s_finished <= '1';
 							s_overflow <= '0';
@@ -71,9 +77,24 @@ begin
 						
 					-- OPTYPE = Logical AND (And)
 					when "1001" =>
+						-- Simple AND calculation
+						s_result(11 downto 0) <= op1_i(11 downto 0) AND op2_i(11 downto 0);
+						
+						s_sign <= '0';
+						s_finished <= '1';
+						s_overflow <= '0';
+						s_error <= '0';
 						
 					-- OPTYPE = Rotate Left (roL)
 					when "1100" =>
+						-- Simple Rotate Left calculation
+						s_result(11 downto 1) <= op1_i(10 downto 0);
+						s_result(0) <= op1_i(11);
+						
+						s_sign <= '0';
+						s_finished <= '1';
+						s_overflow <= '0';
+						s_error <= '0';
 						
 					-- OPTYPE = Not Available (error)
 					when others =>
