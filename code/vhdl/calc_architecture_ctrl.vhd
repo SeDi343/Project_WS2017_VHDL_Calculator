@@ -86,9 +86,9 @@ begin
 				when OP1 =>
 					s_led <= "0000000000000000";
 					s_dig0 <= C_OP1START;
-					s_dig1 <= BinaryToDigit(swsync_i(11 downto 8));
-					s_dig2 <= BinaryToDigit(swsync_i( 7 downto 4));
-					s_dig3 <= BinaryToDigit(swsync_i( 3 downto 0));
+					s_dig1 <= BinaryToDigit(swsync_i(11 downto 8)); -- 1. Digit of OP1
+					s_dig2 <= BinaryToDigit(swsync_i( 7 downto 4)); -- 2. Digit of OP1
+					s_dig3 <= BinaryToDigit(swsync_i( 3 downto 0)); -- 3. Digit of OP1
 					s_op1 <= swsync_i(11 downto 0);
 					
 					-- If Button BTNL is pressed
@@ -101,9 +101,9 @@ begin
 				when OP2 =>
 					s_led <= "0000000000000000";
 					s_dig0 <= C_OP2START;
-					s_dig1 <= BinaryToDigit(swsync_i(11 downto 8));
-					s_dig2 <= BinaryToDigit(swsync_i( 7 downto 4));
-					s_dig3 <= BinaryToDigit(swsync_i( 3 downto 0));
+					s_dig1 <= BinaryToDigit(swsync_i(11 downto 8)); -- 1. Digit of OP2
+					s_dig2 <= BinaryToDigit(swsync_i( 7 downto 4)); -- 2. Digit of OP2
+					s_dig3 <= BinaryToDigit(swsync_i( 3 downto 0)); -- 3. Digit of OP2
 					s_op2 <= swsync_i(11 downto 0);
 					
 					-- If Button BTNL is pressed
@@ -152,14 +152,34 @@ begin
 				-- State 4: BTNL => DISP1 shows signed result (or error/overflow)
 				--                  LED15 is on if result is displayed
 				when RESULT =>
-					
+					-- ALU finished calculation and show result
 					if finished_i = '1' then
-						-- show result_i
-						-- show sign_i
+						-- show the sign in the first 7-segment digit
+						if sign_i = '1' then
+							s_dig0 <= "11111101"; -- Digit "-"
+						elsif sign_i = '0' then
+							s_dig0 <= "11111111"; -- Digit " "
+						end if;
+						
+						-- Show result in the last 3 7-segment digits
+						s_dig1 <= BinaryToDigit(result_i(11 downto 8)); -- 1. Digit of result
+						s_dig2 <= BinaryToDigit(result_i( 7 downto 4)); -- 2. Digit of result
+						s_dig3 <= BinaryToDigit(result_i( 3 downto 0)); -- 3. Digit of result
+						
 					elsif overflow_i = '1' then
-						-- show overflow
+						-- Show Overflow if overflow_i = 1
+						s_dig0 <= "11000101";	-- Digit "o"
+						s_dig1 <= "11000101";	-- Digit "o"
+						s_dig2 <= "11000101";	-- Digit "o"
+						s_dig3 <= "11000101";	-- Digit "o"
+						
 					elsif error_i = '1' then 
-						--show error
+						--Show Error in case of error = 1
+						s_dig0 <= "01100001"; -- Digit "E"
+						s_dig1 <= "11110101"; -- Digit "r"
+						s_dig2 <= "11110101"; -- Digit "r"
+						s_dig3 <= "11000101"; -- Digit "o"
+						
 					end if;
 					
 					s_start <= '0';

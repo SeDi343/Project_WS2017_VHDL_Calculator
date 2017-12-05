@@ -88,6 +88,6 @@ begin
 		 		pb_i <= "0100";
 		 		wait for 15 ns;
 		 		
-		 		wait until clk_i = '1'
+		 		wait until clk_i = '1';
 		 	end process p_test;
 end tb_io_architecture_ctrl;
