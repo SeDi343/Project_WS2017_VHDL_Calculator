@@ -77,6 +77,10 @@ begin
 			s_start <= '0';
 			s_led <= "0000000000000000";
 			s_pbstate <= "00";
+			s_dig0 <= "11111111";	-- Digit " "
+			s_dig1 <= "11111111";	-- Digit " "
+			s_dig2 <= "11111111";	-- Digit " "
+			s_dig3 <= "11111111";	-- Digit " "
 			
 		elsif clk_i'event and clk_i = '1' then
 			-- Single States of the State Machine for the Calculator
