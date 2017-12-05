@@ -17,7 +17,6 @@ architecture tb_io_architecture_ctrl of tb_io_entity_ctrl is
 	component io_entity_ctrl
 	port(clk_i    :  in std_logic;												-- System Clock (100 MHz)
 	     reset_i  :  in std_logic;												-- Asynchronous reset (BTNU)
-	     khzen_o : out std_logic;
 	     dig0_i   :  in std_logic_vector( 7 downto 0);		-- State of 7 segments and decimal point of Digit 0 (from FPGA-internal logic)
 	     dig1_i   :  in std_logic_vector( 7 downto 0);		-- State of 7 segments and decimal point of Digit 1 (from FPGA-internal logic)
 	     dig2_i   :  in std_logic_vector( 7 downto 0);		-- State of 7 segments and decimal point of Digit 2 (from FPGA-internal logic)
@@ -46,7 +45,6 @@ architecture tb_io_architecture_ctrl of tb_io_entity_ctrl is
 	signal led_o    : std_logic_vector(15 downto 0);
 	signal swsync_o : std_logic_vector(15 downto 0);
 	signal pbsync_o : std_logic_vector( 3 downto 0);
-	signal khzen_o : std_logic;
 	
 begin
 	
@@ -68,28 +66,27 @@ begin
 		 ss_sel_o => ss_sel_o,
 		 led_o    => led_o,
 		 swsync_o => swsync_o,
-		 pbsync_o => pbsync_o,
-		 khzen_o => khzen_o);
+		 pbsync_o => pbsync_o);
 		 
 		 p_test : process
 		 	begin
-		 		dig0_i <= "00000011";
-		 		dig1_i <= "00011111";
-		 		dig2_i <= "00100101";
-		 		dig3_i <= "00001101";
+		 		dig0_i <= "00000001";
+		 		dig1_i <= "00000010";
+		 		dig2_i <= "00000011";
+		 		dig3_i <= "00000100";
 		 		led_i <= "1111111111111111";
 		 		sw_i <= "1000000000000000";
 		 		pb_i <= "1000";
-		 		wait for 15 ns;
+		 		wait for 250 ns;
 		 		
-		 		dig0_i <= "00011111";
-		 		dig1_i <= "00011111";
-		 		dig2_i <= "00011111";
-		 		dig3_i <= "00011111";
+		 		dig0_i <= "00000101";
+		 		dig1_i <= "00000110";
+		 		dig2_i <= "00000111";
+		 		dig3_i <= "00001000";
 		 		led_i <= "1000000000000000";
 		 		sw_i <= "1100000000000000";
 		 		pb_i <= "0100";
-		 		wait for 15 ns;
+		 		wait for 250 ns;
 		 		
 		 		wait until clk_i = '1';
 		 	end process p_test;
