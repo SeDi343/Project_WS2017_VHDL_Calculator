@@ -27,7 +27,7 @@ architecture calc_architecture_ctrl of calc_entity_ctrl is
 	signal s_dig2    : std_logic_vector( 7 downto 0);	-- State of 7 segments and decimal point of Digit 2
 	signal s_dig3    : std_logic_vector( 7 downto 0);	-- State of 7 segments and decimal point of Digit 3
 	signal s_led     : std_logic_vector(15 downto 0);	-- State of 16 LEDs
-	signal s_pbstate : std_logic_vector( 1 downto 0); -- Button state (pressing button)
+	signal s_pbstate : std_logic_vector( 1 downto 0);	-- Button state (pressing button)
 	signal s_state   : t_state;
 	
 	-----------------------------------------------------------------------------
