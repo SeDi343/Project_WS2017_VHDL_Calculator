@@ -18,16 +18,17 @@ architecture calc_architecture_ctrl of calc_entity_ctrl is
 
 	type t_state is (OP1, OP2, OPTYPE, RESULT, RESTART);	-- States for the FSM Calculator
 	
-	signal s_op1    : std_logic_vector(11 downto 0);	-- Operand OP1 for the ALU
-	signal s_op2    : std_logic_vector(11 downto 0);	-- Operand OP2 for the ALU
-	signal s_optype : std_logic_vector( 3 downto 0);	-- Defines the type of arithmetic/logic operation for the ALU
-	signal s_start  : std_logic;											-- Instructs the ALU to start a new calculation
-	signal s_dig0   : std_logic_vector( 7 downto 0);	-- State of 7 segments and decimal point of Digit 0
-	signal s_dig1   : std_logic_vector( 7 downto 0);	-- State of 7 segments and decimal point of Digit 1
-	signal s_dig2   : std_logic_vector( 7 downto 0);	-- State of 7 segments and decimal point of Digit 2
-	signal s_dig3   : std_logic_vector( 7 downto 0);	-- State of 7 segments and decimal point of Digit 3
-	signal s_led    : std_logic_vector(15 downto 0);	-- State of 16 LEDs
-	signal s_state  : t_state;
+	signal s_op1     : std_logic_vector(11 downto 0);	-- Operand OP1 for the ALU
+	signal s_op2     : std_logic_vector(11 downto 0);	-- Operand OP2 for the ALU
+	signal s_optype  : std_logic_vector( 3 downto 0);	-- Defines the type of arithmetic/logic operation for the ALU
+	signal s_start   : std_logic;											-- Instructs the ALU to start a new calculation
+	signal s_dig0    : std_logic_vector( 7 downto 0);	-- State of 7 segments and decimal point of Digit 0
+	signal s_dig1    : std_logic_vector( 7 downto 0);	-- State of 7 segments and decimal point of Digit 1
+	signal s_dig2    : std_logic_vector( 7 downto 0);	-- State of 7 segments and decimal point of Digit 2
+	signal s_dig3    : std_logic_vector( 7 downto 0);	-- State of 7 segments and decimal point of Digit 3
+	signal s_led     : std_logic_vector(15 downto 0);	-- State of 16 LEDs
+	signal s_pbstate : std_logic_vector( 1 downto 0); -- Button state (pressing button)
+	signal s_state   : t_state;
 	
 	-----------------------------------------------------------------------------
 	-- Function to convert the binary 4 bits for a 7-segment to digit code
@@ -75,6 +76,7 @@ begin
 			s_state <= OP1;
 			s_start <= '0';
 			s_led <= "0000000000000000";
+			s_pbstate <= "00";
 			
 		elsif clk_i'event and clk_i = '1' then
 			-- Single States of the State Machine for the Calculator
@@ -92,7 +94,15 @@ begin
 					s_op1 <= swsync_i(11 downto 0);
 					
 					-- If Button BTNL is pressed
-					if pbsync_i = "1000" then
+					if pbsync_i = "1000" and s_pbstate = "00" then
+						s_pbstate <= "01";
+					end if;
+					if pbsync_i = "0000" and s_pbstate = "01" then
+						s_pbstate <= "11";
+					end if;
+					
+					if s_pbstate = "11" then
+						s_pbstate <= "00";
 						s_state <= OP2;
 					end if;
 				
@@ -107,7 +117,15 @@ begin
 					s_op2 <= swsync_i(11 downto 0);
 					
 					-- If Button BTNL is pressed
-					if pbsync_i = "1000" then
+					if pbsync_i = "1000" and s_pbstate = "00" then
+						s_pbstate <= "01";
+					end if;
+					if pbsync_i = "0000" and s_pbstate = "01" then
+						s_pbstate <= "11";
+					end if;
+					
+					if s_pbstate = "11" then
+						s_pbstate <= "00";
 						s_state <= OPTYPE;
 					end if;
 				
@@ -144,8 +162,15 @@ begin
 					end case;
 					
 					-- If Button BTNL is pressed
-					if pbsync_i = "1000" then
-						s_start <= '1';
+					if pbsync_i = "1000" and s_pbstate = "00" then
+						s_pbstate <= "01";
+					end if;
+					if pbsync_i = "0000" and s_pbstate = "01" then
+						s_pbstate <= "11";
+					end if;
+					
+					if s_pbstate = "11" then
+						s_pbstate <= "00";
 						s_state <= RESULT;
 					end if;
 				
@@ -192,7 +217,15 @@ begin
 					end if;
 					
 					-- If Button BTNL is pressed
-					if pbsync_i = "1000" then
+					if pbsync_i = "1000" and s_pbstate = "00" then
+						s_pbstate <= "01";
+					end if;
+					if pbsync_i = "0000" and s_pbstate = "01" then
+						s_pbstate <= "11";
+					end if;
+					
+					if s_pbstate = "11" then
+						s_pbstate <= "00";
 						s_state <= RESTART;
 					end if;
 				
