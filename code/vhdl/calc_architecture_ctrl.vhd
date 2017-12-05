@@ -171,6 +171,7 @@ begin
 					
 					if s_pbstate = "11" then
 						s_pbstate <= "00";
+						s_start <= '1';
 						s_state <= RESULT;
 					end if;
 				
