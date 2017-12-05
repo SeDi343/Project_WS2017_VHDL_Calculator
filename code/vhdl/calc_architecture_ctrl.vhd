@@ -166,12 +166,18 @@ begin
 						s_dig2 <= BinaryToDigit(result_i( 7 downto 4)); -- 2. Digit of result
 						s_dig3 <= BinaryToDigit(result_i( 3 downto 0)); -- 3. Digit of result
 						
+						-- Stop the ALU from calculation
+						s_start <= '0';
+						
 					elsif overflow_i = '1' then
 						-- Show Overflow if overflow_i = 1
 						s_dig0 <= "11000101";	-- Digit "o"
 						s_dig1 <= "11000101";	-- Digit "o"
 						s_dig2 <= "11000101";	-- Digit "o"
 						s_dig3 <= "11000101";	-- Digit "o"
+						
+						-- Stop the ALU from calculation
+						s_start <= '0';
 						
 					elsif error_i = '1' then 
 						--Show Error in case of error = 1
@@ -180,9 +186,10 @@ begin
 						s_dig2 <= "11110101"; -- Digit "r"
 						s_dig3 <= "11000101"; -- Digit "o"
 						
+						-- Stop the ALU from calculation
+						s_start <= '0';
+						
 					end if;
-					
-					s_start <= '0';
 					
 					-- If Button BTNL is pressed
 					if pbsync_i = "1000" then
