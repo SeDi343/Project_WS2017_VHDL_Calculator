@@ -44,7 +44,7 @@ begin
 			-- counter.
 			
 			-- 1khz signal allways low
-				s_1khzen <= '0';
+			s_1khzen <= '0';
 			
 			-- if counter equals the requested value else increment the counter
 			if s_enctr = C_ENCOUNTVAL then
