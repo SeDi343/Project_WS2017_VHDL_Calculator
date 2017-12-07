@@ -48,8 +48,8 @@ begin
 			if start_i = '1' then
 				s_regout(11 downto 0) <= op1_i;
 				s_regout(12) <= '0';
-				s_progress <= '1';
 				s_cntval <= "0000000";
+				s_progress <= '1';
 			end if;
 			
 			-- If start_i was 1 and calculation progress flag is set to 1
