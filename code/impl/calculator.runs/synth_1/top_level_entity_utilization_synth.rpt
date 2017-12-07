@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.1 (lin64) Build 1538259 Fri Apr  8 15:45:23 MDT 2016
-| Date         : Thu Dec  7 23:22:30 2017
+| Date         : Fri Dec  8 00:10:09 2017
 | Host         : WP-Linux running 64-bit Ubuntu 17.10
 | Command      : report_utilization -file top_level_entity_utilization_synth.rpt -pb top_level_entity_utilization_synth.pb
 | Design       : top_level_entity
@@ -149,18 +149,18 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| LUT6     |  112 |                 LUT |
+| LUT6     |  113 |                 LUT |
 | FDRE     |   92 |        Flop & Latch |
-| LUT4     |   50 |                 LUT |
+| LUT4     |   54 |                 LUT |
 | FDCE     |   48 |        Flop & Latch |
-| LUT5     |   41 |                 LUT |
-| LUT2     |   29 |                 LUT |
+| LUT2     |   38 |                 LUT |
 | OBUF     |   28 |                  IO |
 | FDPE     |   28 |        Flop & Latch |
+| LUT5     |   27 |                 LUT |
 | IBUF     |   22 |                  IO |
-| LUT1     |   20 |                 LUT |
-| CARRY4   |   18 |          CarryLogic |
-| LUT3     |   12 |                 LUT |
+| LUT3     |   20 |                 LUT |
+| CARRY4   |   20 |          CarryLogic |
+| LUT1     |   15 |                 LUT |
 | FDSE     |    3 |        Flop & Latch |
 | BUFG     |    1 |               Clock |
 +----------+------+---------------------+
