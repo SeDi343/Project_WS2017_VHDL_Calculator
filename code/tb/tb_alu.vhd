@@ -61,62 +61,62 @@ begin
 		 
 		 p_test : process
 		 	begin
-		 		start_i <= '0';
 		 		op1_i <= "000000001000";
 		 		op2_i <= "000000000100";
 		 		optype_i <= "0001";
+		 		start_i <= '0';
 		 		wait for 100 ns;
 		 		
-		 		start_i <= '1';
-		 		wait for 5 ns;
-		 		start_i <= '0';
 		 		op1_i <= "000000001000";
 		 		op2_i <= "000000000100";
 		 		optype_i <= "0001";
-		 		wait for 100 ns;
-		 		
 		 		start_i <= '1';
-		 		wait for 5 ns;
+		 		wait for 10 ns;
 		 		start_i <= '0';
+		 		wait for 250 ns;
+		 		
 		 		op1_i <= "000000000100";
 		 		op2_i <= "000000001000";
 		 		optype_i <= "0001";
-		 		wait for 100 ns;
-		 		
 		 		start_i <= '1';
-		 		wait for 5 ns;
+		 		wait for 10 ns;
 		 		start_i <= '0';
+		 		wait for 250 ns;
+		 		
 		 		op1_i <= "000000011011";
 		 		optype_i <= "0110";
-		 		wait for 100 ns;
-		 		
 		 		start_i <= '1';
-		 		wait for 5 ns;
+		 		wait for 10 ns;
 		 		start_i <= '0';
+		 		wait for 250 ns;
+		 		
 		 		op1_i <= "000000000000";
 		 		optype_i <= "0110";
-		 		wait for 100 ns;
-		 		
 		 		start_i <= '1';
-		 		wait for 5 ns;
+		 		wait for 10 ns;
 		 		start_i <= '0';
+		 		wait for 250 ns;
+		 		
 		 		op1_i <= "000000011011";
 		 		op2_i <= "100000110011";
 		 		optype_i <= "1001";
-		 		wait for 100 ns;
-		 		
 		 		start_i <= '1';
-		 		wait for 5 ns;
+		 		wait for 10 ns;
 		 		start_i <= '0';
+		 		wait for 250 ns;
+		 		
 		 		op1_i <= "100010000010";
 		 		optype_i <= "1100";
-		 		wait for 100 ns;
-		 		
 		 		start_i <= '1';
-		 		wait for 5 ns;
+		 		wait for 10 ns;
 		 		start_i <= '0';
+		 		wait for 250 ns;
+		 		
 		 		optype_i <= "0011";
-		 		wait for 100 ns;
+		 		start_i <= '1';
+		 		wait for 10 ns;
+		 		start_i <= '0';
+		 		wait for 250 ns;
 		 		
 		 		wait until clk_i = '1';
 		 	end process p_test;
