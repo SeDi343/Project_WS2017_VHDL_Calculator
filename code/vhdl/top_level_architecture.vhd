@@ -94,7 +94,7 @@ begin
 		 reset_i  => reset_i,
 		 dig0_i   => s_dig0,
 		 dig1_i   => s_dig1,
-		 dig2_i   => s_dig1,
+		 dig2_i   => s_dig2,
 		 dig3_i   => s_dig3,
 		 led_i    => s_led,
 		 sw_i     => sw_i,

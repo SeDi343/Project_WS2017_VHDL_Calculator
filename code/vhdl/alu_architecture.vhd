@@ -9,7 +9,6 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.std_logic_arith.all;
-use IEEE.numeric_std_unsigned.all;
 
 architecture alu_architecture of alu_entity is
 	
@@ -38,9 +37,6 @@ begin
 		elsif clk_i'event and clk_i = '1' then
 			-- Set the flags to 0 every rising edge
 			s_finished <= '0';
-			s_overflow <= '0';
-			s_error <= '0';
-			s_sign <= '0';
 			
 			-- Code for the ALU calculating Sub, Square Root, Logical AND and rotate Left
 			
@@ -50,6 +46,9 @@ begin
 				s_regout(12) <= '0';
 				s_cntval <= "0000000";
 				s_progress <= '1';
+				s_overflow <= '0';
+				s_error <= '0';
+				s_sign <= '0';
 			end if;
 			
 			-- If start_i was 1 and calculation progress flag is set to 1
@@ -61,7 +60,7 @@ begin
 					-- OPTYPE = Substraction (Sub)
 					when "0001" =>
 						-- Positive Substraction
-						if op1_i > op2_i then
+						if op1_i >= op2_i then
 							-- result = op1 - op2 and fill other bits of result with 0
 							s_result(11 downto 0) <= unsigned(op1_i(11 downto 0)) - unsigned(op2_i(11 downto 0));
 							s_result(15 downto 12) <= "0000";
@@ -76,10 +75,8 @@ begin
 						elsif op1_i < op2_i then
 							-- result = not(op1 - op2) + 1 and fill other bits of result with 0
 							-- sign is 1
-							s_result(11 downto 0) <= unsigned(op1_i(11 downto 0)) - unsigned(op2_i(11 downto 0));
-							s_result(11 downto 0) <= not(s_result(11 downto 0));
-							s_result(11 downto 0) <= unsigned(s_result(11 downto 0)) + '1';
-							s_result(15 downto 12) <= "0000";
+							s_result(11 downto 0) <= unsigned(not(unsigned(op1_i(11 downto 0)) - unsigned(op2_i(11 downto 0)))) + '1';
+							s_result(15 downto 12) <= "1111";
 							
 							s_sign <= '1';
 							s_finished <= '1';
@@ -90,14 +87,6 @@ begin
 						
 					-- OPTYPE = Square Root (Sro)
 					when "0110" =>
-						-- Create the subtrahent from the counter by shifting to the left and adding 1 at the lsb
-						-- This creates numbers like 1,3,5,7,9
-						s_subtr(6 downto 1) <= s_cntval(5 downto 0);
-						s_subtr(0) <= '1';
-						
-						-- Difference is register out - subtrahent
-						s_subdiff <= unsigned(s_regout(12 downto 0)) - unsigned(s_subtr(6 downto 0));
-						
 						-- If Operand 1 is 0 the result is 0 aswell not 1
 						if op1_i = "000000000000" then
 							s_result(15 downto 0) <= "0000000000000000";
@@ -107,24 +96,32 @@ begin
 							s_progress <= '0';
 							s_overflow <= '0';
 							s_error <= '0';
-						end if;
-						
-						-- If the subdifference is negative msb = 1
-						if s_subdiff(12) = '1' then
-							s_result( 6 downto 0) <= unsigned(s_cntval(6 downto 0)) + '1';
-							s_result(15 downto 7) <= "000000000";
+						else
+							-- Create the subtrahent from the counter by shifting to the left and adding 1 at the lsb
+							-- This creates numbers like 1,3,5,7,9
+							s_subtr(6 downto 1) <= s_cntval(5 downto 0);
+							s_subtr(0) <= '1';
 							
-							s_sign <= '0';
-							s_finished <= '1';
-							s_progress <= '0';
-							s_overflow <= '0';
-							s_error <= '0';
-						
-						-- If the subdifference is positive msb = 0
-						elsif s_subdiff(12) = '0' then
-							-- Increment the counter and push the subdiff to the regout
-							s_regout <= s_subdiff;
-							s_cntval <= unsigned(s_cntval(6 downto 0)) + '1';
+							-- Difference is register out - subtrahent
+							s_subdiff <= unsigned(s_regout(12 downto 0)) - unsigned(s_subtr(6 downto 0));
+							
+							-- If the subdifference is negative msb = 1
+							if s_subdiff(12) = '1' then
+								s_result( 6 downto 0) <= unsigned(s_cntval(6 downto 0)) + '1';
+								s_result(15 downto 7) <= "000000000";
+								
+								s_sign <= '0';
+								s_finished <= '1';
+								s_progress <= '0';
+								s_overflow <= '0';
+								s_error <= '0';
+							
+							-- If the subdifference is positive msb = 0
+							elsif s_subdiff(12) = '0' then
+								-- Increment the counter and push the subdiff to the regout
+								s_regout <= s_subdiff;
+								s_cntval <= unsigned(s_cntval(6 downto 0)) + '1';
+							end if;
 						end if;
 						
 					-- OPTYPE = Logical AND (And)
