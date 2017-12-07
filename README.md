@@ -97,15 +97,15 @@ Logic Unit”.
   
 The pin-out for the FPGA is shown in Table 7: Overview  
   
-| Port Name                 | Pin | Feature      |
-| ------------------------- |:---:| ------------ |
-| clk_i                     | W5  | System Clock |
-| reset_i                   | T18 | Button BTNU  |
-| ss_sel_o(0)...ss_sel_o(3) |     |              |
-| ss_o(0)...ss_o(7)         |     |              |
-| sw_i(0)...sw_i(15)        |     |              |
-| pb_i(0)...pb_i(3)         |     |              |
-| led_o(0)...led_o(15)      |     |              |
+| Port Name                 | Pin                 | Feature      |
+| ------------------------- |:-------------------:| ------------ |
+| clk_i                     | **W5**              | System Clock |
+| reset_i                   | **T18**             | Button BTNU  |
+| ss_sel_o(0)...ss_sel_o(3) |                     |              |
+| ss_o(0)...ss_o(7)         |                     |              |
+| sw_i(0)...sw_i(15)        |                     |              |
+| pb_i(0)...pb_i(3)         | **W19** U18 T17 U17 |              |
+| led_o(0)...led_o(15)      |                     |              |
   
 Pin Description Printed on the Basys3 board and the schematics of the FPGA board (CIS website "FPGA Board Documentation")  
 

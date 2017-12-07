@@ -12,7 +12,6 @@ use IEEE.std_logic_1164.all;
 entity io_entity_ctrl is
 	port(clk_i    :  in std_logic;												-- System Clock (100 MHz)
 	     reset_i  :  in std_logic;												-- Asynchronous reset (BTNU)
-	     khzen_o  : out std_logic;
 	     dig0_i   :  in std_logic_vector( 7 downto 0);		-- State of 7 segments and decimal point of Digit 0 (from FPGA-internal logic)
 	     dig1_i   :  in std_logic_vector( 7 downto 0);		-- State of 7 segments and decimal point of Digit 1 (from FPGA-internal logic)
 	     dig2_i   :  in std_logic_vector( 7 downto 0);		-- State of 7 segments and decimal point of Digit 2 (from FPGA-internal logic)
