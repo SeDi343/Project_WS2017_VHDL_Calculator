@@ -85,6 +85,10 @@ begin
 		elsif clk_i'event and clk_i = '1' then
 			-- Single States of the State Machine for the Calculator
 			
+			-- The Start value is only active for one clock event, therefore
+			-- we set it to low everytime, without the requested clock event
+			s_start <= '0';
+			
 			-- From State 1 to State 5; with BTNL button
 			case s_state is
 				-- State 1: RESET => Left Digit of DISP1 shows "1" and OP1 Input
@@ -175,6 +179,8 @@ begin
 					
 					if s_pbstate = "11" then
 						s_pbstate <= "00";
+						
+						-- Send ALU the instruction to calculate
 						s_start <= '1';
 						s_state <= RESULT;
 					end if;
@@ -196,9 +202,6 @@ begin
 						s_dig2 <= BinaryToDigit(result_i( 7 downto 4)); -- 2. Digit of result
 						s_dig3 <= BinaryToDigit(result_i( 3 downto 0)); -- 3. Digit of result
 						
-						-- Stop the ALU from calculation
-						s_start <= '0';
-						
 					elsif overflow_i = '1' then
 						-- Show Overflow if overflow_i = 1
 						s_dig0 <= "11000101";	-- Digit "o"
@@ -206,19 +209,19 @@ begin
 						s_dig2 <= "11000101";	-- Digit "o"
 						s_dig3 <= "11000101";	-- Digit "o"
 						
-						-- Stop the ALU from calculation
-						s_start <= '0';
-						
 					elsif error_i = '1' then 
-						--Show Error in case of error = 1
+						-- Show Error in case of error = 1
 						s_dig0 <= "01100001"; -- Digit "E"
 						s_dig1 <= "11110101"; -- Digit "r"
 						s_dig2 <= "11110101"; -- Digit "r"
 						s_dig3 <= "11000101"; -- Digit "o"
 						
-						-- Stop the ALU from calculation
-						s_start <= '0';
-						
+					else
+						-- Show nothing if you get nothing
+						s_dig0 <= "11111111"; -- Digit " "
+						s_dig1 <= "11111111"; -- Digit " "
+						s_dig2 <= "11111111"; -- Digit " "
+						s_dig3 <= "11111111"; -- Digit " "
 					end if;
 					
 					-- If Button BTNL is pressed
