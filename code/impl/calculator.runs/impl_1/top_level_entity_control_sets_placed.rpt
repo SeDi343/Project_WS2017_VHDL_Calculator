@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.1 (lin64) Build 1538259 Fri Apr  8 15:45:23 MDT 2016
-| Date         : Fri Dec  8 00:10:54 2017
+| Date         : Fri Dec  8 03:01:27 2017
 | Host         : WP-Linux running 64-bit Ubuntu 17.10
 | Command      : report_control_sets -verbose -file top_level_entity_control_sets_placed.rpt
 | Design       : top_level_entity
@@ -23,7 +23,7 @@ Table of Contents
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
 | Number of unique control sets                            |    16 |
-| Unused register locations in slices containing registers |    77 |
+| Unused register locations in slices containing registers |    71 |
 +----------------------------------------------------------+-------+
 
 
@@ -33,37 +33,37 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |               4 |            4 |
+| No           | No                    | No                     |               5 |            4 |
 | No           | No                    | Yes                    |              27 |           13 |
 | No           | Yes                   | No                     |               0 |            0 |
-| Yes          | No                    | No                     |              75 |           31 |
+| Yes          | No                    | No                     |              62 |           21 |
 | Yes          | No                    | Yes                    |              49 |           25 |
-| Yes          | Yes                   | No                     |              16 |            6 |
+| Yes          | Yes                   | No                     |              34 |           11 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 3. Detailed Control Set Information
 -----------------------------------
 
-+------------------+------------------------------------------+--------------------------------------+------------------+----------------+
-|   Clock Signal   |               Enable Signal              |           Set/Reset Signal           | Slice Load Count | Bel Load Count |
-+------------------+------------------------------------------+--------------------------------------+------------------+----------------+
-|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_overflow0           |                                      |                1 |              1 |
-|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/__1_n_0               | reset_i_IBUF                         |                1 |              1 |
-|  clk_i_IBUF_BUFG | i_io_entity_ctrl/s_ss_sel0               | i_io_entity_ctrl/s_ss_sel[0]_i_1_n_0 |                1 |              1 |
-|  clk_i_IBUF_BUFG | i_io_entity_ctrl/s_ss_sel0               | i_io_entity_ctrl/s_ss_sel[3]_i_1_n_0 |                1 |              2 |
-|  clk_i_IBUF_BUFG |                                          |                                      |                4 |              4 |
-|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_optype0             |                                      |                1 |              4 |
-|  clk_i_IBUF_BUFG | i_io_entity_ctrl/s_ss_sel0               |                                      |                5 |              9 |
-|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_op20                |                                      |                5 |             12 |
-|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_op10                |                                      |                3 |             12 |
-|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_result_reg[3][0]    |                                      |                7 |             12 |
-|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/E[0]                  |                                      |                5 |             12 |
-|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/E[0]                  | i_alu_entity/s_cntval[11]_i_1_n_0    |                4 |             13 |
-|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_subdiff_reg[0]_0[0] |                                      |                4 |             13 |
-|  clk_i_IBUF_BUFG | i_io_entity_ctrl/s_1khzen_reg_n_0        | reset_i_IBUF                         |                9 |             20 |
-|  clk_i_IBUF_BUFG |                                          | reset_i_IBUF                         |               13 |             27 |
-|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_dig3[7]_i_1_n_0     | reset_i_IBUF                         |               15 |             28 |
-+------------------+------------------------------------------+--------------------------------------+------------------+----------------+
++------------------+---------------------------------------+--------------------------------------+------------------+----------------+
+|   Clock Signal   |             Enable Signal             |           Set/Reset Signal           | Slice Load Count | Bel Load Count |
++------------------+---------------------------------------+--------------------------------------+------------------+----------------+
+|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/__1_n_0            | reset_i_IBUF                         |                1 |              1 |
+|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_overflow0        |                                      |                1 |              1 |
+|  clk_i_IBUF_BUFG | i_io_entity_ctrl/s_ss_sel0            | i_io_entity_ctrl/s_ss_sel[0]_i_1_n_0 |                1 |              1 |
+|  clk_i_IBUF_BUFG | i_io_entity_ctrl/s_ss_sel0            | i_io_entity_ctrl/s_ss_sel[3]_i_1_n_0 |                1 |              2 |
+|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_optype0          |                                      |                1 |              4 |
+|  clk_i_IBUF_BUFG |                                       |                                      |                4 |              5 |
+|  clk_i_IBUF_BUFG | i_io_entity_ctrl/s_ss_sel0            |                                      |                4 |              9 |
+|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/E[0]               |                                      |                2 |             12 |
+|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_op20             |                                      |                4 |             12 |
+|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_op10             |                                      |                6 |             12 |
+|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_result_reg[3][0] |                                      |                3 |             12 |
+|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_subtr_reg[1]     | i_alu_entity/s_subtr[15]_i_1_n_0     |                4 |             15 |
+|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/E[0]               | i_alu_entity/s_subdiff[15]_i_1_n_0   |                5 |             16 |
+|  clk_i_IBUF_BUFG | i_io_entity_ctrl/s_1khzen_reg_n_0     | reset_i_IBUF                         |                7 |             20 |
+|  clk_i_IBUF_BUFG |                                       | reset_i_IBUF                         |               13 |             27 |
+|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_dig3[7]_i_1_n_0  | reset_i_IBUF                         |               17 |             28 |
++------------------+---------------------------------------+--------------------------------------+------------------+----------------+
 
 

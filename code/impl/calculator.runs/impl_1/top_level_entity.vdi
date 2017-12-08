@@ -2,8 +2,8 @@
 # Vivado v2016.1 (64-bit)
 # SW Build 1538259 on Fri Apr  8 15:45:23 MDT 2016
 # IP Build 1537824 on Fri Apr  8 04:28:57 MDT 2016
-# Start of session at: Fri Dec  8 00:11:54 2017
-# Process ID: 25986
+# Start of session at: Fri Dec  8 03:02:13 2017
+# Process ID: 21097
 # Current directory: /home/sebastian/Dokumente/Fachhochschule/Semester_3/Digitaler_Schaltungsentwurf/project/code/impl/calculator.runs/impl_1
 # Command line: vivado -log top_level_entity.vdi -applog -messageDb vivado.pb -mode batch -source top_level_entity.tcl -notrace
 # Log file: /home/sebastian/Dokumente/Fachhochschule/Semester_3/Digitaler_Schaltungsentwurf/project/code/impl/calculator.runs/impl_1/top_level_entity.vdi
@@ -14,20 +14,20 @@ Command: open_checkpoint top_level_entity_routed.dcp
 
 Starting open_checkpoint Task
 
-Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 968.781 ; gain = 0.000 ; free physical = 1290 ; free virtual = 5879
-INFO: [Netlist 29-17] Analyzing 42 Unisim elements for replacement
+Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 968.785 ; gain = 0.000 ; free physical = 2493 ; free virtual = 6664
+INFO: [Netlist 29-17] Analyzing 50 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-479] Netlist was created with Vivado 2016.1
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Project 1-570] Preparing netlist for logic optimization
-Parsing XDC File [/home/sebastian/Dokumente/Fachhochschule/Semester_3/Digitaler_Schaltungsentwurf/project/code/impl/calculator.runs/impl_1/.Xil/Vivado-25986-WP-Linux/dcp/top_level_entity.xdc]
-Finished Parsing XDC File [/home/sebastian/Dokumente/Fachhochschule/Semester_3/Digitaler_Schaltungsentwurf/project/code/impl/calculator.runs/impl_1/.Xil/Vivado-25986-WP-Linux/dcp/top_level_entity.xdc]
+Parsing XDC File [/home/sebastian/Dokumente/Fachhochschule/Semester_3/Digitaler_Schaltungsentwurf/project/code/impl/calculator.runs/impl_1/.Xil/Vivado-21097-WP-Linux/dcp/top_level_entity.xdc]
+Finished Parsing XDC File [/home/sebastian/Dokumente/Fachhochschule/Semester_3/Digitaler_Schaltungsentwurf/project/code/impl/calculator.runs/impl_1/.Xil/Vivado-21097-WP-Linux/dcp/top_level_entity.xdc]
 Reading XDEF placement.
 Reading placer database...
 Reading XDEF routing.
-Read XDEF File: Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.08 . Memory (MB): peak = 1167.387 ; gain = 0.000 ; free physical = 1111 ; free virtual = 5690
-Restored from archive | CPU: 0.050000 secs | Memory: 0.475861 MB |
-Finished XDEF File Restore: Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.08 . Memory (MB): peak = 1167.387 ; gain = 0.000 ; free physical = 1111 ; free virtual = 5690
+Read XDEF File: Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.08 . Memory (MB): peak = 1167.391 ; gain = 0.000 ; free physical = 2302 ; free virtual = 6475
+Restored from archive | CPU: 0.050000 secs | Memory: 0.489151 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.08 . Memory (MB): peak = 1167.391 ; gain = 0.000 ; free physical = 2302 ; free virtual = 6475
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
@@ -48,8 +48,8 @@ Creating bitstream...
 Writing bitstream ./top_level_entity.bit...
 INFO: [Vivado 12-1842] Bitgen Completed Successfully.
 INFO: [Project 1-120] WebTalk data collection is mandatory when using a WebPACK part without a full Vivado license. To see the specific WebTalk data collected for your design, open the usage_statistics_webtalk.html or usage_statistics_webtalk.xml file in the implementation directory.
-INFO: [Common 17-186] '/home/sebastian/Dokumente/Fachhochschule/Semester_3/Digitaler_Schaltungsentwurf/project/code/impl/calculator.runs/impl_1/usage_statistics_webtalk.xml' has been successfully sent to Xilinx on Fri Dec  8 00:12:19 2017. For additional details about this file, please refer to the WebTalk help file at /home/sebastian/bin/Xilinx/Vivado/2016.1/doc/webtalk_introduction.html.
+INFO: [Common 17-186] '/home/sebastian/Dokumente/Fachhochschule/Semester_3/Digitaler_Schaltungsentwurf/project/code/impl/calculator.runs/impl_1/usage_statistics_webtalk.xml' has been successfully sent to Xilinx on Fri Dec  8 03:02:38 2017. For additional details about this file, please refer to the WebTalk help file at /home/sebastian/bin/Xilinx/Vivado/2016.1/doc/webtalk_introduction.html.
 INFO: [Common 17-83] Releasing license: Implementation
-write_bitstream: Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1603.242 ; gain = 435.855 ; free physical = 749 ; free virtual = 5328
+write_bitstream: Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 1603.246 ; gain = 435.855 ; free physical = 1939 ; free virtual = 6113
 INFO: [Vivado_Tcl 4-395] Unable to parse hwdef file top_level_entity.hwdef
-INFO: [Common 17-206] Exiting Vivado at Fri Dec  8 00:12:19 2017...
+INFO: [Common 17-206] Exiting Vivado at Fri Dec  8 03:02:38 2017...
