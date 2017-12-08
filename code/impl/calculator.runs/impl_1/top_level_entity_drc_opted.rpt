@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.1 (lin64) Build 1538259 Fri Apr  8 15:45:23 MDT 2016
-| Date         : Fri Dec  8 03:01:22 2017
+| Date         : Fri Dec  8 16:56:01 2017
 | Host         : WP-Linux running 64-bit Ubuntu 17.10
 | Command      : report_drc -file top_level_entity_drc_opted.rpt
 | Design       : top_level_entity

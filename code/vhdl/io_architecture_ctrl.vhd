@@ -93,6 +93,7 @@ begin
 		if reset_i = '1' then
 			-- Reset System
 			
+			s_ss_sel <= "1111";
 			s_state <= MUX_DIG0;
 			
 		elsif clk_i'event and clk_i = '1' then
