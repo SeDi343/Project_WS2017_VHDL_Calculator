@@ -76,6 +76,7 @@ begin
 			
 			s_state <= OP1;
 			s_start <= '0';
+			s_finished <= '0';
 			s_led <= "0000000000000000";
 			s_pbstate <= "00";
 			s_dig0 <= "11111111";	-- Digit " "

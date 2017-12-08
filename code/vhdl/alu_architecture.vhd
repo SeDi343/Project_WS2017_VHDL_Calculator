@@ -32,6 +32,8 @@ begin
 		if reset_i = '1' then
 			-- Reset System
 			s_progress <= '0';
+			s_finished <= '0';
+			s_error <= '0';
 			
 		elsif clk_i'event and clk_i = '1' then
 			-- Set the flags to 0 every rising edge

@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.1 (lin64) Build 1538259 Fri Apr  8 15:45:23 MDT 2016
-| Date         : Fri Dec  8 16:56:06 2017
+| Date         : Fri Dec  8 22:37:17 2017
 | Host         : WP-Linux running 64-bit Ubuntu 17.10
 | Command      : report_control_sets -verbose -file top_level_entity_control_sets_placed.rpt
 | Design       : top_level_entity
@@ -33,11 +33,11 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |               5 |            4 |
-| No           | No                    | Yes                    |              27 |           13 |
+| No           | No                    | No                     |               2 |            2 |
+| No           | No                    | Yes                    |              30 |           13 |
 | No           | Yes                   | No                     |               0 |            0 |
-| Yes          | No                    | No                     |              61 |           22 |
-| Yes          | No                    | Yes                    |              53 |           25 |
+| Yes          | No                    | No                     |              61 |           24 |
+| Yes          | No                    | Yes                    |              53 |           24 |
 | Yes          | Yes                   | No                     |              31 |            9 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
@@ -50,18 +50,18 @@ Table of Contents
 +------------------+---------------------------------------+------------------------------------+------------------+----------------+
 |  clk_i_IBUF_BUFG | i_calc_entity_ctrl/__1_n_0            | reset_i_IBUF                       |                1 |              1 |
 |  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_overflow0        |                                    |                1 |              1 |
+|  clk_i_IBUF_BUFG |                                       |                                    |                2 |              2 |
 |  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_optype0          |                                    |                1 |              4 |
-|  clk_i_IBUF_BUFG |                                       |                                    |                4 |              5 |
 |  clk_i_IBUF_BUFG | i_io_entity_ctrl/s_ss0                |                                    |                4 |              8 |
 |  clk_i_IBUF_BUFG | i_calc_entity_ctrl/E[0]               |                                    |                3 |             12 |
-|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_op20             |                                    |                4 |             12 |
+|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_op20             |                                    |                5 |             12 |
 |  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_op10             |                                    |                5 |             12 |
-|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_result_reg[3][0] |                                    |                4 |             12 |
+|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_result_reg[3][0] |                                    |                5 |             12 |
 |  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_subtr_reg[1]     | i_alu_entity/s_subtr[15]_i_1_n_0   |                4 |             15 |
 |  clk_i_IBUF_BUFG | i_calc_entity_ctrl/E[0]               | i_alu_entity/s_subdiff[15]_i_1_n_0 |                5 |             16 |
-|  clk_i_IBUF_BUFG | i_io_entity_ctrl/s_1khzen_reg_n_0     | reset_i_IBUF                       |               10 |             24 |
-|  clk_i_IBUF_BUFG |                                       | reset_i_IBUF                       |               13 |             27 |
-|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_dig3[7]_i_1_n_0  | reset_i_IBUF                       |               14 |             28 |
+|  clk_i_IBUF_BUFG | i_io_entity_ctrl/s_1khzen_reg_n_0     | reset_i_IBUF                       |                6 |             24 |
+|  clk_i_IBUF_BUFG | i_calc_entity_ctrl/s_dig3[7]_i_1_n_0  | reset_i_IBUF                       |               17 |             28 |
+|  clk_i_IBUF_BUFG |                                       | reset_i_IBUF                       |               13 |             30 |
 +------------------+---------------------------------------+------------------------------------+------------------+----------------+
 
 
