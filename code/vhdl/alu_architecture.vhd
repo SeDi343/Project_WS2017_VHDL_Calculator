@@ -18,7 +18,7 @@ architecture alu_architecture of alu_entity is
 	signal s_overflow : std_logic;											-- Indicates that result of an operation exceeds 16 bits
 	signal s_error    : std_logic;											-- Indicates that an error occured during the process
 	signal s_progress : std_logic;											-- Next to the start_i, flag to calculate everyime till he finished his calculation
-	signal s_cntval   : std_logic_vector(15 downto 0);	-- Counter for the sqrt / operations taken
+	signal s_cntval   : std_logic_vector(11 downto 0);	-- Counter for the sqrt / operations taken
 	signal s_subtr    : std_logic_vector(15 downto 0);	-- Subtrahent for the sqrt / 1,3,5,7,9,...
 	signal s_subdiff  : std_logic_vector(15 downto 0);	-- The difference for the sqrt op1 - subtr
 	
@@ -46,7 +46,7 @@ begin
 			if start_i = '1' then
 				s_subdiff(11 downto 0) <= op1_i;
 				s_subdiff(15 downto 12) <= "0000";
-				s_cntval <= "0000000000000000";
+				s_cntval <= "000000000000";
 				s_subtr <= "0000000000000001";
 				s_progress <= '1';
 				s_overflow <= '0';
@@ -99,7 +99,8 @@ begin
 						if s_subdiff(15) = '1' then
 							-- We need to decrease the counter by 1 because we already have 1
 							-- before our first calculation
-							s_result <= unsigned(s_cntval) - '1';
+							s_result(11 downto 0) <= unsigned(s_cntval) - '1';
+							s_result(15 downto 12) <= "0000";
 							s_sign <= '0';
 							s_finished <= '1';
 							s_progress <= '0';
