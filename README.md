@@ -2,6 +2,7 @@
 
 ## Entitys
 ### Top Level Entity
+Used Board: [Basys 3 Artix-7 FPGA](http://store.digilentinc.com/basys-3-artix-7-fpga-trainer-board-recommended-for-introductory-users/)  
   
 The top-level module “calc_top” of the calculator consists of three sub-units named “io_ctrl”,  
 “calc_ctrl” and “alu” which are described in the following. Table 3: Overview shows all I/Os of the top-level  
